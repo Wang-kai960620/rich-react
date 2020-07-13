@@ -6,16 +6,23 @@ import Icon from "../components/Icons";
 const TitleSection = styled.div`
 display: flex;
 justify-content: space-between;
+align-items: center;
+padding: 8px 0;
 line-height: 22px;
-padding: 12px 12px;
 background: #fff;
 >.icon{
 width: 20px ;
 height: 20px;
 }
 >div{
+padding: 5px;
 text-align: center;
-border: 1px solid red;
+background: #eeeef1;
+border-radius: 5px;
+>.input{
+background: #c4c4c4;
+border-radius: 5px;
+}
 }
 `;
 const TagsSection = styled.ol`
@@ -44,6 +51,7 @@ justify-content: center;
 align-items: center;
 flex-wrap: wrap;
 background: #9bc9c0;
+
 >.output{
 display: flex;
 flex-direction: row-reverse;
@@ -58,6 +66,8 @@ margin: 20px 34px;
 >.numberList{
 width: 80vw;
 margin: 10px 20px;
+max-width: 310px;
+min-height: 310px;
 >button{
 font-size: 20px;
 border: none;
@@ -79,7 +89,7 @@ function Money() {
         <Icon name='close'/>
         <span>记一笔</span>
         <div>
-          <span>收入</span>
+          <span className='input'>收入</span>
           <span>支出</span>
         </div>
       </TitleSection>
