@@ -11,8 +11,6 @@ import Tags from "./views/Tags";
 import NoMatch from "./views/NoMatch";
 
 
-
-
 function App() {
   return (
     <Router>
@@ -36,12 +34,5 @@ function App() {
     </Router>
   );
 }
-
-
-
-
-
-
-
 
 export default App;
