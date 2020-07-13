@@ -67,7 +67,7 @@ margin: 20px 34px;
 width: 80vw;
 margin: 10px 20px;
 max-width: 310px;
-min-height: 310px;
+min-height: 202px;
 >button{
 font-size: 20px;
 border: none;
