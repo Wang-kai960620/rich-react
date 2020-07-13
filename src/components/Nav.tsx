@@ -1,9 +1,11 @@
 import {Link} from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
-import x from 'icons/home.svg'
+require('icons/home.svg')
+require('icons/tags.svg')
+require('icons/statistics.svg')
 
-console.log(x)
+
 const NavWrapper = styled.div`
 >ul{
   background: #f7f9f3;
@@ -11,8 +13,16 @@ const NavWrapper = styled.div`
   text-align: center;
    >li{
     width: 33.333%;
-    padding: 20px;
-    font-size: 15px;
+    padding: 10px 0;
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .icon{
+      width: 30px;
+      height: 30px;
+    }
   }
  }
 `;
@@ -22,12 +32,21 @@ function Nav() {
     <NavWrapper>
       <ul>
         <li>
+          <svg className='icon'>
+            <use xlinkHref='#home' />
+          </svg>
           <Link to="/money">money</Link>
         </li>
         <li>
+          <svg className='icon' >
+            <use xlinkHref='#tags' />
+          </svg>
           <Link to="/tags">tags</Link>
         </li>
         <li>
+          <svg className='icon' fill='red' >
+            <use xlinkHref='#statistics' />
+          </svg>
           <Link to="/statistics">statistics</Link>
         </li>
       </ul>
