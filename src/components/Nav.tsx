@@ -1,8 +1,9 @@
 import {Link} from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
+import x from 'icons/home.svg'
 
-
+console.log(x)
 const NavWrapper = styled.div`
 >ul{
   background: #f7f9f3;
