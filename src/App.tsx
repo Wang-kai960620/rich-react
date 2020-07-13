@@ -4,9 +4,10 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
+import Nav from "./components/Nav";
+
 
 const Wrapper = styled.div`
 height: 100vh;
@@ -16,18 +17,8 @@ flex-direction: column;
 const Main = styled.div`
 flex-grow: 1;
 `;
-const Nav = styled.div`
->ul{
-background: #f7f9f3;
-display: flex;
-text-align: center;
->li{
-width: 33.333%;
-padding: 20px;
-font-size: 15px;
-}
-}
-`;
+
+
 
 function App() {
   return (
@@ -54,19 +45,7 @@ function App() {
         </Main>
 
         <div>
-          <Nav>
-            <ul>
-              <li>
-                <Link to="/money">money</Link>
-              </li>
-              <li>
-                <Link to="/tags">tags</Link>
-              </li>
-              <li>
-                <Link to="/statistics">statistics</Link>
-              </li>
-            </ul>
-          </Nav>
+         <Nav/>
         </div>
       </Wrapper>
     </Router>
