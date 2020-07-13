@@ -23,6 +23,7 @@ margin: 16px 0;
 display: flex;
 overflow-x: scroll;
 overflow-y: hidden;
+flex-direction: column; 
 flex-wrap: wrap;
 max-height: 350px;
 >li{
