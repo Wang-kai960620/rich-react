@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, {useState} from "react";
+import dayjs from 'dayjs'
 
 const Wrapper = styled.div`
 display: flex;
@@ -78,14 +79,13 @@ const NumberSection: React.FC = () => {
         setOutput(output+text)
         break;
       case"今日":
-        const timeAt = new Date()
+        const timeAt =  dayjs( new Date()).format('YYYY/MM/DD')
         console.log(timeAt);
         break;
       case"清零":
         setOutput("0");
         break;
       case"完成":
-        console.log(output);
         const x = (new Function('return ' + output))()
         console.log(x);
         setOutput('0')
