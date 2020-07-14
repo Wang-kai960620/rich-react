@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useState} from "react";
 import Icon from "../../components/Icons";
 
 const Wrapper = styled.div`
@@ -15,32 +15,40 @@ width: 20px ;
 height: 20px;
 margin: 0 10px;
 }
->div{
+>ol{
 padding: 5px;
+display: flex;
 text-align: center;
-background: #eeeef1;
+background: #eeeef2;
 border-radius: 5px;
 margin: 0 5px;
->span{
+>li{
 padding: 0 5px ;
 }
 >.selected{
-background: #c4c4c4;
+background: #ffffff;
 border-radius: 5px;
 }
 }
 `;
 
-const TitleSection:React.FC = ()=>{
+const TitleSection: React.FC = () => {
+  const typeMap = {"-": "支出", "+": "收入"};
+  const [type, setType] = useState("-");
+  const [typeList] = useState<("-" | "+")[]>(["-", "+"]);
   return (
     <Wrapper>
       <Icon name='close'/>
       <span>记一笔</span>
-      <div>
-        <span className='selected'>收入</span>
-        <span>支出</span>
-      </div>
+      <ol>
+        {typeList.map(t =>
+          <li key={t}
+              className={type === t ? "selected" : ""}
+              onClick={()=>{setType(t)}}
+          >{typeMap[t]}</li>
+        )}
+      </ol>
     </Wrapper>
-  )
-}
-export {TitleSection}
+  );
+};
+export {TitleSection};

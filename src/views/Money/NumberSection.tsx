@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useState} from "react";
 
 const Wrapper = styled.div`
 display: flex;
@@ -33,6 +33,8 @@ width: 50px;
 height: 30px;
 border-radius: 5px;
 background: #ffffff;
+outline: none;
+
 }
 >.success{
 background: rgb(255, 199, 0);
@@ -40,11 +42,62 @@ background: rgb(255, 199, 0);
 }
 `;
 
-const NumberSection : React.FC = ()=>{
+
+const NumberSection: React.FC = () => {
+  const [output, setOutput] = useState("0");
+  const onUpdate = (e: React.MouseEvent) => {
+    const text = (e.target as HTMLButtonElement).textContent;
+    switch (text) {
+      case"0":
+      case"1":
+      case"2":
+      case"3":
+      case"4":
+      case"5":
+      case"6":
+      case"7":
+      case"8":
+      case"9":
+        if (output === "0") {
+          setOutput(text);
+        } else {
+          setOutput(output + text);
+        }
+        break;
+      case".":
+        if (output.indexOf(".") >= 0) {
+          return;
+        } else {
+          setOutput(output + ".");
+        }
+        break;
+      case"+":
+        setOutput(output+text)
+        break;
+      case"-":
+        setOutput(output+text)
+        break;
+      case"今日":
+        const timeAt = new Date()
+        console.log(timeAt);
+        break;
+      case"清零":
+        setOutput("0");
+        break;
+      case"完成":
+        console.log(output);
+        const x = (new Function('return ' + output))()
+        console.log(x);
+        setOutput('0')
+        break;
+      default:
+        return '0'
+    }
+  };
   return (
     <Wrapper>
-      <div className='output'>100</div>
-      <div className='numberList'>
+      <div className='output'>{output}</div>
+      <div className='numberList' onClick={onUpdate}>
         <button>1</button>
         <button>2</button>
         <button>3</button>
@@ -62,6 +115,6 @@ const NumberSection : React.FC = ()=>{
         <button>清零</button>
         <button className='success'>完成</button>
       </div>
-  </Wrapper>)
-}
-export {NumberSection}
+    </Wrapper>);
+};
+export {NumberSection};

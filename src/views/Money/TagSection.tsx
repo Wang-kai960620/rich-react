@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useState} from "react";
 import Icon from "../../components/Icons";
 
 const Wrapper = styled.ol`
@@ -20,7 +20,7 @@ width: 70px;
 height: 50px;
 border-radius: 10px;
 margin: 10px 12px;
-font-size: 10px;
+font-size: 15px;
 &.selected{
 background: #cae2dd;
 border: 2px solid #a3c5bd;
@@ -31,40 +31,37 @@ height: 30px ;
 }
 }
 `;
-const TagSection :React.FC = ()=>{
+const TagSection: React.FC = () => {
+  //TODO
+  // const tagMap = {
+  //   "日用", "美容", "数码", "汽车", "医疗", "餐饮","书籍", "社交", "房贷", "长辈", "交通", "果蔬", "旅行", "通讯", "娱乐", "零食", "宠物", "烟酒", "服饰", "母婴","住房", "彩票"
+  // }
+  const [tag] = useState<string[]>(["日用", "美容", "数码", "汽车", "医疗", "餐饮", "书籍", "社交", "房贷", "长辈", "交通", "果蔬", "旅行", "通讯", "娱乐", "零食", "宠物", "烟酒", "服饰", "母婴", "住房", "彩票"
+  ]);
+  const [selectedTag, setSelectedTag] = useState<string[]>([]);
+  const onCheck = (tag: string) => {
+    const index = selectedTag.indexOf(tag);
+    if (index < 0) {
+      setSelectedTag(selectedTag.splice(0, 1));
+      setSelectedTag([...selectedTag, tag]);
+    } else {
+      setSelectedTag(selectedTag.filter(item => item !== tag));
+    }
+  };
   return (
     <Wrapper>
-      <li className='selected'>
-        <Icon name='lions'/>
-        老虎
-      </li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>21</li>
-      <li>22</li>
-      <li>23</li>
-      <li>24</li>
-      <li>25</li>
+      {
+        tag.map(tag =>
+          <li className={selectedTag.indexOf(tag) >= 0 ? "selected" : ""} key={tag}
+              onClick={() => onCheck(tag)}
+          >
+            <Icon name='lions'/>
+            {tag}
+          </li>)
+      }
+      <li>新增标签</li>
     </Wrapper>
-  )
-}
+  );
+};
 
-
-export {TagSection}
+export {TagSection};
