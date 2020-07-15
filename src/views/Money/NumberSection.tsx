@@ -43,8 +43,11 @@ background: rgb(255, 199, 0);
 }
 `;
 
+type Props={
+  onChange:(amount:number)=>void
+}
 
-const NumberSection: React.FC = () => {
+const NumberSection: React.FC<Props> = (props) => {
   const [output, setOutput] = useState("0");
   const onUpdate = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
@@ -86,8 +89,8 @@ const NumberSection: React.FC = () => {
         setOutput("0");
         break;
       case"完成":
-        const x = (new Function('return ' + output))()
-        console.log(x);
+        const x =(new Function('return ' + output))()
+        props.onChange(x)
         setOutput('0')
         break;
       default:

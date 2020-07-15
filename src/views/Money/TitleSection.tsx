@@ -31,10 +31,13 @@ border-radius: 5px;
 }
 }
 `;
-
-const TitleSection: React.FC = () => {
+type Props={
+  value:'-'|'+',
+  onChange:(selected:'-'|'+' )=>void
+}
+const TitleSection: React.FC<Props> = (props) => {
   const typeMap = {"-": "支出", "+": "收入"};
-  const [type, setType] = useState("-");
+  const type = props.value
   const [typeList] = useState<("-" | "+")[]>(["-", "+"]);
   return (
     <Wrapper>
@@ -44,7 +47,7 @@ const TitleSection: React.FC = () => {
         {typeList.map(t =>
           <li key={t}
               className={type === t ? "selected" : ""}
-              onClick={()=>{setType(t)}}
+              onClick={()=>{props.onChange(t)}}
           >{typeMap[t]}</li>
         )}
       </ol>

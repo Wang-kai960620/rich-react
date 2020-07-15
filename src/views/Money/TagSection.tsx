@@ -31,21 +31,26 @@ height: 30px ;
 }
 }
 `;
-const TagSection: React.FC = () => {
+type Props={
+  value:string[],
+  onChange:(selected:string[])=>void
+}
+
+const TagSection: React.FC <Props>= (props) => {
   //TODO
   // const tagMap = {
   //   "日用", "美容", "数码", "汽车", "医疗", "餐饮","书籍", "社交", "房贷", "长辈", "交通", "果蔬", "旅行", "通讯", "娱乐", "零食", "宠物", "烟酒", "服饰", "母婴","住房", "彩票"
   // }
   const [tag] = useState<string[]>(["日用", "美容", "数码", "汽车", "医疗", "餐饮", "书籍", "社交", "房贷", "长辈", "交通", "果蔬", "旅行", "通讯", "娱乐", "零食", "宠物", "烟酒", "服饰", "母婴", "住房", "彩票"
   ]);
-  const [selectedTag, setSelectedTag] = useState<string[]>([]);
+  const selectedTag = props.value
   const onCheck = (tag: string) => {
     const index = selectedTag.indexOf(tag);
     if (index < 0) {
-      setSelectedTag(selectedTag.splice(0, 1));
-      setSelectedTag([...selectedTag, tag]);
+      props.onChange(selectedTag.splice(0, 1));
+      props.onChange([...selectedTag, tag]);
     } else {
-      setSelectedTag(selectedTag.filter(item => item !== tag));
+      props.onChange(selectedTag.filter(item => item !== tag));
     }
   };
   return (
