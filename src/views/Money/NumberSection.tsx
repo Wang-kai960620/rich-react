@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, {useState} from "react";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
 const Wrapper = styled.div`
 display: flex;
@@ -8,7 +8,6 @@ justify-content: center;
 align-items: center;
 flex-wrap: wrap;
 background: #9bc9c0;
-
 >.output{
 display: flex;
 flex-direction: row-reverse;
@@ -35,7 +34,6 @@ height: 30px;
 border-radius: 5px;
 background: #ffffff;
 outline: none;
-
 }
 >.success{
 background: rgb(255, 199, 0);
@@ -43,8 +41,8 @@ background: rgb(255, 199, 0);
 }
 `;
 
-type Props={
-  onChange:(amount:number)=>void
+type Props = {
+  onChange: (amount: number) => void
 }
 
 const NumberSection: React.FC<Props> = (props) => {
@@ -76,25 +74,25 @@ const NumberSection: React.FC<Props> = (props) => {
         }
         break;
       case"+":
-        setOutput(output+text)
+        setOutput(output + text);
         break;
       case"-":
-        setOutput(output+text)
+        setOutput(output + text);
         break;
       case"今日":
-        const timeAt =  dayjs( new Date()).format('YYYY/MM/DD')
+        const timeAt = dayjs(new Date()).format("YYYY/MM/DD");
         console.log(timeAt);
         break;
       case"清零":
         setOutput("0");
         break;
       case"完成":
-        const x =(new Function('return ' + output))()
-        props.onChange(x)
-        setOutput('0')
+        const x = (new Function("return " + output))();
+        props.onChange(x);
+        setOutput("0");
         break;
       default:
-        return '0'
+        return "0";
     }
   };
   return (

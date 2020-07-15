@@ -39,21 +39,21 @@ function Nav() {
     <NavWrapper>
       <ul>
         <li>
-          <NavLink to="/money" activeClassName='selected'>
+          <NavLink to="/home" activeClassName='selected'>
             <Icon name='home'/>
-            money
+            首页
           </NavLink>
         </li>
         <li>
-          <NavLink to="/tags" activeClassName='selected'>
-            <Icon name='tags'/>
-            tags
+          <NavLink to="/money" activeClassName='selected'>
+            <Icon name='money'/>
+            记账
           </NavLink>
         </li>
         <li>
           <NavLink to="/statistics" activeClassName='selected'>
             <Icon name='statistics'/>
-            statistics
+            统计
           </NavLink>
         </li>
       </ul>
