@@ -10,10 +10,8 @@ align-items: center;
 padding: 8px 0;
 line-height: 22px;
 background: #fff;
->.icon{
-width: 20px ;
-height: 20px;
-margin: 0 10px;
+>span{
+margin: 0 30px;
 }
 >ol{
 padding: 5px;
@@ -41,7 +39,6 @@ const TitleSection: React.FC<Props> = (props) => {
   const [typeList] = useState<("-" | "+")[]>(["-", "+"]);
   return (
     <Wrapper>
-      <Icon name='close'/>
       <span>记一笔</span>
       <ol>
         {typeList.map(t =>

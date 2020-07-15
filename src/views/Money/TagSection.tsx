@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, {useState} from "react";
 import Icon from "components/Icons";
+import {Link} from 'react-router-dom';
 
 const Wrapper = styled.ol`
 margin: 16px 0;
@@ -22,6 +23,7 @@ height: 50px;
 border-radius: 10px;
 margin: 10px 12px;
 font-size: 15px;
+
 &.selected{
 background: #cae2dd;
 border: 2px solid #a3c5bd;
@@ -30,6 +32,16 @@ border: 2px solid #a3c5bd;
 width: 30px ;
 height: 30px ;
 }
+}
+>a{
+display: flex;
+justify-content: center;
+align-items: center;
+background: #fff;
+width: 70px;
+height: 50px;
+margin: 10px 12px;
+border-radius: 10px;
 }
 `;
 type Props = {
@@ -54,7 +66,7 @@ const TagSection: React.FC<Props> = (props) => {
       props.onChange(selectedTag.filter(item => item !== tag));
     }
   };
-  const onClick = () => {};
+  const onClick = () => { };
   return (
     <Wrapper>
       {
@@ -66,7 +78,9 @@ const TagSection: React.FC<Props> = (props) => {
             {tag}
           </li>)
       }
-      <li onClick={onClick}>新增标签</li>
+      <Link to={'/tags'}>
+        <li onClick={onClick}>新增标签</li>
+      </Link>
     </Wrapper>
   );
 };
