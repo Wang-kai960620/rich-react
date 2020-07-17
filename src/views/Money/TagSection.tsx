@@ -11,7 +11,8 @@ overflow-x: scroll;
 overflow-y: hidden;
 flex-direction: column; 
 flex-wrap: wrap;
-max-height: 350px;
+flex-grow: 1;
+height: 41vh;
 >li{
 background: #fff;
 display: flex;
@@ -50,10 +51,8 @@ type Props = {
 }
 
 const TagSection: React.FC<Props> = (props) => {
-  //TODO
-  // const tagMap = {
-  //   "日用", "美容", "数码", "汽车", "医疗", "餐饮","书籍", "社交", "房贷", "长辈", "交通", "果蔬", "旅行", "通讯", "娱乐", "零食", "宠物", "烟酒", "服饰", "母婴","住房", "彩票"
-  // }
+  // const {tags,findName } = use
+
   const [tag] = useState<string[]>(["日用", "美容", "数码", "汽车", "医疗", "餐饮", "书籍", "社交", "房贷", "长辈", "交通", "果蔬", "旅行", "通讯", "娱乐", "零食", "宠物", "烟酒", "服饰", "母婴", "住房", "彩票"
   ]);
   const selectedTag = props.value;
@@ -78,7 +77,7 @@ const TagSection: React.FC<Props> = (props) => {
             {tag}
           </li>)
       }
-      <Link to={'/tags'}>
+      <Link to={'/money/tags'}>
         <li onClick={onClick}>新增标签</li>
       </Link>
     </Wrapper>

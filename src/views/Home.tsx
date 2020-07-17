@@ -3,6 +3,7 @@ import Layout from "components/Layout";
 import styled from "styled-components";
 import Icon from "../components/Icons";
 
+
 const Title = styled.div`
 display: flex;
 justify-content: center;

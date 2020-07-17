@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, {useState} from "react";
-import dayjs from "dayjs";
+import {generateOutput} from "./generateOutput";
 
 const Wrapper = styled.div`
 display: flex;
@@ -42,80 +42,71 @@ background: rgb(255, 199, 0);
 `;
 
 type Props = {
+  value: number
   onChange: (amount: number) => void
+  onSave?: () => void
 }
 
 const NumberSection: React.FC<Props> = (props) => {
-  const [output, setOutput] = useState("0");
-  const onUpdate = (e: React.MouseEvent) => {
-    const text = (e.target as HTMLButtonElement).textContent;
-    switch (text) {
-      case"0":
-      case"1":
-      case"2":
-      case"3":
-      case"4":
-      case"5":
-      case"6":
-      case"7":
-      case"8":
-      case"9":
-        if (output === "0") {
-          setOutput(text);
-        } else {
-          setOutput(output + text);
-        }
-        break;
-      case".":
-        if (output.indexOf(".") >= 0) {
-          return;
-        } else {
-          setOutput(output + ".");
-        }
-        break;
-      case"+":
-        setOutput(output + text);
-        break;
-      case"-":
-        setOutput(output + text);
-        break;
-      case"今日":
-        const timeAt = dayjs(new Date()).format("YYYY/MM/DD");
-        console.log(timeAt);
-        break;
-      case"清零":
-        setOutput("0");
-        break;
-      case"完成":
-        const x = (new Function("return " + output))();
-        props.onChange(x);
-        setOutput("0");
-        break;
-      default:
-        return "0";
-    }
-  };
-  return (
-    <Wrapper>
-      <div className='output'>{output}</div>
-      <div className='numberList' onClick={onUpdate}>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>+</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>-</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>今日</button>
-        <button>.</button>
-        <button>0</button>
-        <button>清零</button>
-        <button className='success'>完成</button>
-      </div>
-    </Wrapper>);
-};
+    // const output = props.value.toString();
+  const [output,setOutput] = useState(props.value.toString())
+  console.log(props.value.toString());
+  const _setOutput = (output: string) => {
+      let value: string;
+      let newValue
+      if (output.length > 16) {
+        value = output.slice(0, 16);
+      } else if (output.length === 0) {
+        value = '0';
+      } else if(output.indexOf('+')>0){
+        newValue =output
+        value = '0'
+      }else{
+        value =output;
+      }
+      setOutput(value)
+      props.onChange(parseFloat(value) );
+    };
+    const onUpdate = (e: React.MouseEvent) => {
+      const text = (e.target as HTMLButtonElement).textContent;
+      if (text === null) {return;}
+      if (text === "完成") {
+        setOutput('0');
+        return;
+      }
+      if ("0123456789.".split("").concat(["删除", "清零"]).indexOf(text) >= 0) {
+        _setOutput(generateOutput(text, output));
+      }
+      if (text === "+") {
+        _setOutput(output+'+')
+      }
+      if(text==='-'){
+        _setOutput(output+'-')
+      }
+
+    };
+    return (
+      <Wrapper>
+        <div className='output'>{output}</div>
+        <div className='numberList' onClick={onUpdate}>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>+</button>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>-</button>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>删除</button>
+          <button>.</button>
+          <button>0</button>
+          <button>清零</button>
+          <button className='success' onClick={props.onSave}>完成</button>
+        </div>
+      </Wrapper>);
+  }
+;
 export {NumberSection};
