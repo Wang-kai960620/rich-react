@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 
 const generateOutput = (text: string, output = "0") => {
   switch (text) {

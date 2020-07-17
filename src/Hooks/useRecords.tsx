@@ -11,6 +11,9 @@ type RecordItem = {
 const useRecords = () => {
   const [records, setRecord] = useState<RecordItem[]>([]);
 
+  useEffect(()=>{
+    setRecord(JSON.parse(window.localStorage.getItem('records') || '[]'))
+  },[])
   const saveLocal = (record: RecordItem) => {
     setRecord([...records, record]);
   };

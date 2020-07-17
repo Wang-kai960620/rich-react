@@ -48,18 +48,14 @@ type Props = {
 }
 
 const NumberSection: React.FC<Props> = (props) => {
-    // const output = props.value.toString();
   const [output,setOutput] = useState(props.value.toString())
-  console.log(props.value.toString());
   const _setOutput = (output: string) => {
       let value: string;
-      let newValue
       if (output.length > 16) {
         value = output.slice(0, 16);
       } else if (output.length === 0) {
         value = '0';
       } else if(output.indexOf('+')>0){
-        newValue =output
         value = '0'
       }else{
         value =output;

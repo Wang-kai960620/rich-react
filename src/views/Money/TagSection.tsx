@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 const Wrapper = styled.ol`
 margin: 16px 0;
 display: flex;
-//::-webkit-scrollbar { width: 0 !important }
 overflow-x: scroll;
 overflow-y: hidden;
 flex-direction: column; 

@@ -2,6 +2,9 @@ import React from "react";
 import Layout from "components/Layout";
 import styled from "styled-components";
 import Icon from "../components/Icons";
+import {Link} from "react-router-dom";
+import {useRecords} from "../Hooks/useRecords";
+import dayjs from "dayjs";
 
 
 const Title = styled.div`
@@ -41,6 +44,9 @@ margin: 2px auto;
 width: 100%;
 }
 }
+>a{
+margin: 10px auto;
+
 >button{
 border: 3px solid #a3c4be;
 font-size: 15px;
@@ -48,7 +54,7 @@ padding: 10px 40px;
 background: #b8dbd3;
 outline: none;
 border-radius: 10px 10px 10px 10px;
-margin: 10px auto;
+}
 }
 `;
 const List = styled.div`
@@ -79,13 +85,15 @@ justify-content: space-between;
 padding: 5px 5px;
 color: #CECECE;
 >.rightList{
-width: 80px;
 display: flex;
 flex-wrap: wrap;
 align-items: center;
-justify-content: center;
+margin-left: auto;
+text-align: right;
+>div{
+width: 100%;
+}
 >.money{
-text-align: center;
 font-size: 20px;
 color: #A5CCC1 ;
 }
@@ -104,41 +112,55 @@ height: 40px;
 `;
 
 function Home() {
+  const {records} = useRecords();
+  const today = dayjs(new Date());
+  const output = records.filter(t => t.type === "-").filter(t => dayjs(t.timeAt).isSame(today, "day")).reduce((sum, items) => {return (sum + items.amount);}, 0);
+  const input = records.filter(t => t.type === "+").filter(t => dayjs(t.timeAt).isSame(today, "day")).reduce((sum, items) => {return sum + items.amount;}, 0);
+  const newList = records.slice(records.length-2,999)
   return (
-      <Layout>
-        <Wrapper>
+    <Layout>
+      <Wrapper>
         <Title>
           <div>Panda</div>
         </Title>
         <Middle>
           <div>
             <span className='text'>今日支出</span>
-            <span className='dollar'>￥300</span>
-            <span className='input'>收入￥300</span>
+            <span className='dollar'>￥{output}</span>
+            <span className='input'>收入￥{input}</span>
           </div>
-          <button>记一笔</button>
+          <Link to={"/money"}>
+            <button>记一笔</button>
+          </Link>
         </Middle>
         <List>
-          <span className='time'>今天7月14号</span>
+          <span className='time'>{dayjs(new Date()).format("YYYY年MM月DD日")}</span>
           <div>
-            <span>收入400</span>
-            <span>支出400</span>
+            <span>收入￥{input}</span>
+            <span>支出￥{output}</span>
           </div>
         </List>
         <TextList>
-          <li>
-            <div className='leftList'>
-              <Icon name='lions'/>
-              <span>宠物</span>
-            </div>
-            <div className='rightList'>
-              <span className='money'>+￥300</span>
-              <span>23:00</span>
-            </div>
-          </li>
+          {
+            newList.map(t=>{
+              return (
+                <li key={t.timeAt}>
+                  <div className='leftList'>
+                    <Icon name='lions'/>
+                    <span>宠物</span>
+                  </div>
+                  <div className='rightList'>
+                    <div className='money'>{t.type}￥{t.amount}</div>
+                    <div>{dayjs(t.timeAt).format('HH时hh分')}</div>
+                  </div>
+                </li>
+              )
+            })
+          }
+
         </TextList>
-        </Wrapper>
-      </Layout>
+      </Wrapper>
+    </Layout>
   );
 }
 

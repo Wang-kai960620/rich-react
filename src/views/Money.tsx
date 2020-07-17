@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import React, {useEffect, useRef, useState} from "react";
+import React, { useState} from "react";
 import {TitleSection} from "./Money/TitleSection";
 import {TagSection} from "./Money/TagSection";
 import {NumberSection} from "./Money/NumberSection";
@@ -20,13 +20,7 @@ const defaultFormItem = {
 function Money() {
   const [selected, setSelected] = useState(defaultFormItem);
   const {records, saveLocal} = useRecords();
-  const count = useRef(0)
-  useEffect(()=>{
-    count.current+=1
-    if (count.current>1){
-      console.log(records);
-    }
-  },[records])
+  console.log(records);
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({...selected, ...obj});
   };
@@ -43,7 +37,6 @@ function Money() {
   };
   return (
     <Layout>
-      {JSON.stringify(selected)}
       <TitleSection value={selected.type}
                     onChange={(type) => onChange({type})}
       />

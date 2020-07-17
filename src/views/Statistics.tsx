@@ -1,30 +1,10 @@
 import Layout from "components/Layout";
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Icon from "../components/Icons";
+import {useRecords} from "../Hooks/useRecords";
+import {Title} from "./Statistics/Title";
 
-const Title = styled.div`
- display: flex;
- justify-content: center;
- background: #fff;
- >ol{
-   display: flex;
-   margin: 10px 0;
-   text-align: center;
-   background: #c4c4c4;
-   border-radius: 10px;
-   >li{
-     font-size: 15px;
-      margin: 2px;
-     width: 20vw;
-     padding: 5px 0;
-     &.selected{
-      background: #eeeef1;
-      border-radius: 10px;
-     }
-   }
- }
-`;
 const Chart = styled.div`
 height: 30vh;
 margin: 20px ;
@@ -65,14 +45,13 @@ display: flex;
 justify-content: space-between;
 padding: 5px 5px;
 color: #CECECE;
+
 >.rightList{
-width: 80px;
 display: flex;
 flex-wrap: wrap;
 align-items: center;
-justify-content: center;
+margin-left: auto ;
 >.money{
-text-align: center;
 font-size: 20px;
 color: #A5CCC1 ;
 }
@@ -92,30 +71,35 @@ height: 40px;
 }
 `;
 
+type Choose = "Y" | "M" | "D"
+
+
 function Statistics() {
+  const {records} = useRecords();
+  const [choose,setChoose] = useState<Choose>('D')
+  // const monthList = records.filter(t=>t.)
   return (
     <Layout>
-      <Title>
-        <ol>
-          <li>日</li>
-          <li className='selected'>月</li>
-          <li>年</li>
-        </ol>
-      </Title>
+      <Title choose={choose} onChange={(item)=>{setChoose(item)}}/>
       <Chart/>
       <List>
         <div className='window'>
           <ol>
-            <li>
-              <div className='leftList'>
-                <Icon name='lions'/>
-                <span>宠物</span>
-              </div>
-              <div className='rightList'>
-                <span className='money'>+￥300</span>
-                <span>23:00</span>
-              </div>
-            </li>
+            {
+              records.map(r => {
+                return (
+                  <li key={r.timeAt}>
+                    <div className='leftList'>
+                      <Icon name='lions'/>
+                      <span>{r.tags.map(t => <span key={t}>{t}</span>)}</span>
+                    </div>
+                    <div className='rightList'>
+                      <span className='money'>{r.type}￥{r.amount}</span>
+                    </div>
+                  </li>
+                );
+              })
+            }
           </ol>
         </div>
       </List>

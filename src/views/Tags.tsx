@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import React from "react";
 import styled from "styled-components";
-import {useTagMap} from "./Tags/tagsHub";
+// import {useTagMap} from "./Tags/tagsHub";
 
 
 const List = styled.ol`
@@ -14,7 +14,7 @@ border: 1px solid green;
 }
 `
 function Tags() {
-  const {tagsList,findName} =  useTagMap()
+  // const {tagsList,findName} =  useTagMap()
   return (
     <Layout>
      <List >
