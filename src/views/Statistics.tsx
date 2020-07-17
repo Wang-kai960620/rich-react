@@ -77,7 +77,7 @@ type Choose = "Y" | "M" | "D"
 function Statistics() {
   const {records} = useRecords();
   const [choose,setChoose] = useState<Choose>('D')
-  // const monthList = records.filter(t=>t.)
+
   return (
     <Layout>
       <Title choose={choose} onChange={(item)=>{setChoose(item)}}/>

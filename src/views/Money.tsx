@@ -19,8 +19,7 @@ const defaultFormItem = {
 
 function Money() {
   const [selected, setSelected] = useState(defaultFormItem);
-  const {records, saveLocal} = useRecords();
-  console.log(records);
+  const { saveLocal} = useRecords();
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({...selected, ...obj});
   };

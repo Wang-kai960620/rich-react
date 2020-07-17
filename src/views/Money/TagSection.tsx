@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import React, {useState} from "react";
+import React  from "react";
 import Icon from "components/Icons";
-import {Link} from 'react-router-dom';
+import {Link} from "react-router-dom";
+import {useTagMap} from "../Tags/tagsHub";
 
 const Wrapper = styled.ol`
 margin: 16px 0;
@@ -50,10 +51,8 @@ type Props = {
 }
 
 const TagSection: React.FC<Props> = (props) => {
-  // const {tags,findName } = use
-
-  const [tag] = useState<string[]>(["日用", "美容", "数码", "汽车", "医疗", "餐饮", "书籍", "社交", "房贷", "长辈", "交通", "果蔬", "旅行", "通讯", "娱乐", "零食", "宠物", "烟酒", "服饰", "母婴", "住房", "彩票"
-  ]);
+  const { findKey,getValue} = useTagMap();
+  const tag = Array.from(findKey())
   const selectedTag = props.value;
   const onCheck = (tag: string) => {
     const index = selectedTag.indexOf(tag);
@@ -72,11 +71,11 @@ const TagSection: React.FC<Props> = (props) => {
           <li className={selectedTag.indexOf(tag) >= 0 ? "selected" : ""} key={tag}
               onClick={() => onCheck(tag)}
           >
-            <Icon name='lions'/>
+            <Icon name={getValue(tag) || 'lions'}/>
             {tag}
           </li>)
       }
-      <Link to={'/money/tags'}>
+      <Link to={"/money/tags"}>
         <li onClick={onClick}>新增标签</li>
       </Link>
     </Wrapper>
