@@ -5,6 +5,7 @@ import Icon from "../components/Icons";
 import {Link} from "react-router-dom";
 import {useRecords} from "../Hooks/useRecords";
 import dayjs from "dayjs";
+import {useTagMap} from "./Tags/tagsHub";
 
 
 const Title = styled.div`
@@ -113,10 +114,11 @@ height: 40px;
 
 function Home() {
   const {records} = useRecords();
+  const {getValue} = useTagMap();
   const today = dayjs(new Date());
   const output = records.filter(t => t.type === "-").filter(t => dayjs(t.timeAt).isSame(today, "day")).reduce((sum, items) => {return (sum + items.amount);}, 0);
   const input = records.filter(t => t.type === "+").filter(t => dayjs(t.timeAt).isSame(today, "day")).reduce((sum, items) => {return sum + items.amount;}, 0);
-  const newList = records.slice(records.length-2,999)
+  const newList = records.sort((a, b) => { return dayjs(a.timeAt).valueOf() - dayjs(b.timeAt).valueOf();}).slice(records.length - 2, 999);
   return (
     <Layout>
       <Wrapper>
@@ -142,19 +144,19 @@ function Home() {
         </List>
         <TextList>
           {
-            newList.map(t=>{
+            newList.map(t => {
               return (
                 <li key={t.timeAt}>
                   <div className='leftList'>
-                    <Icon name='lions'/>
-                    <span>宠物</span>
+                    <Icon name={getValue((t.tags).toString() ) || 'lions'}/>
+                    <span>{t.tags}</span>
                   </div>
                   <div className='rightList'>
                     <div className='money'>{t.type}￥{t.amount}</div>
-                    <div>{dayjs(t.timeAt).format('HH时hh分')}</div>
+                    <div>{dayjs(t.timeAt).format("HH时hh分")}</div>
                   </div>
                 </li>
-              )
+              );
             })
           }
 

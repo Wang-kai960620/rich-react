@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Icon from "../components/Icons";
 import {useRecords} from "../Hooks/useRecords";
 import {Title} from "./Statistics/Title";
+import {useTagMap} from "./Tags/tagsHub";
+import dayjs from "dayjs";
 
 const Chart = styled.div`
 height: 30vh;
@@ -77,6 +79,8 @@ type Choose = "Y" | "M" | "D"
 function Statistics() {
   const {records} = useRecords();
   const [choose,setChoose] = useState<Choose>('D')
+  const {getValue} = useTagMap()
+  const newList = records.sort((a, b) => dayjs(b.timeAt).valueOf()-dayjs(a.timeAt).valueOf())
 
   return (
     <Layout>
@@ -86,11 +90,11 @@ function Statistics() {
         <div className='window'>
           <ol>
             {
-              records.map(r => {
+              newList.map(r => {
                 return (
                   <li key={r.timeAt}>
                     <div className='leftList'>
-                      <Icon name='lions'/>
+                      <Icon name={getValue((r.tags).toString()) || 'lions'}/>
                       <span>{r.tags.map(t => <span key={t}>{t}</span>)}</span>
                     </div>
                     <div className='rightList'>
