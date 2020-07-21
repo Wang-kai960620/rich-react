@@ -75,9 +75,9 @@ const TagSection: React.FC<Props> = (props) => {
             {tag}
           </li>)
       }
-      <Link to={"/money/tags"}>
-        <li onClick={onClick}>新增标签</li>
-      </Link>
+      {/*<Link to={"/money/tags"}>*/}
+      {/*  <li onClick={onClick}>新增标签</li>*/}
+      {/*</Link>*/}
     </Wrapper>
   );
 };
