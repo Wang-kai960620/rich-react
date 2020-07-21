@@ -24,13 +24,13 @@ const Wrapper = styled.div`
  }
 `;
 type Props = {
-  choose: "Y" | "M" | "D",
-  onChange: (selected: "Y" | "M" | "D") => void
+  choose: '-'|'+',
+  onChange: (selected:'-'|'+') => void
 }
 const Title: React.FC<Props> = (props) => {
-  const switchMap = {"Y": "年", "M": "月", "D": "日"};
+  const switchMap = {"-": "支出", "+": "收入"};
   const choose = props.choose;
-  const [switchList] = useState<("Y" | "M" | "D")[]>(["D", "M", "Y"]);
+  const [switchList] = useState<('-'|'+')[]>(['-','+']);
   return (
     <Wrapper>
       <ol>{

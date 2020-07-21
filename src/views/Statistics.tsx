@@ -6,18 +6,8 @@ import {useRecords} from "../Hooks/useRecords";
 import {Title} from "./Statistics/Title";
 import {useTagMap} from "./Tags/tagsHub";
 import dayjs from "dayjs";
+import {Echart} from "./Statistics/Echarts";
 
-const Chart = styled.div`
-height: 30vh;
-margin: 20px ;
-display: flex;
-flex-wrap: wrap;
-background: #fff;
->div{
-border: 1px solid black;
-flex-grow: 1;
-}
-`;
 const List = styled.div`
 margin: 10px 20px ;
 background: #fff;
@@ -32,6 +22,7 @@ width: 100%;
 border: 6px solid #9bc9c0;
 position: absolute;
 margin: auto;
+
 }
 >.window{
 height: 40vh;
@@ -73,19 +64,19 @@ height: 40px;
 }
 `;
 
-type Choose = "Y" | "M" | "D"
-
+type Type = '-' | '+'
 
 function Statistics() {
   const {records} = useRecords();
-  const [choose,setChoose] = useState<Choose>('D')
+  const [type,setType] =useState<Type>('-')
   const {getValue} = useTagMap()
-  const newList = records.sort((a, b) => dayjs(b.timeAt).valueOf()-dayjs(a.timeAt).valueOf())
+  const newList = records.filter(i=>i.type===type).sort((a, b) => dayjs(b.timeAt).valueOf()-dayjs(a.timeAt).valueOf())
+
 
   return (
     <Layout>
-      <Title choose={choose} onChange={(item)=>{setChoose(item)}}/>
-      <Chart/>
+      <Title choose={type} onChange={(item)=>{setType(item)}}/>
+      <Echart/>
       <List>
         <div className='window'>
           <ol>

@@ -48,36 +48,36 @@ type Props = {
 }
 
 const NumberSection: React.FC<Props> = (props) => {
-  const [output,setOutput] = useState(props.value.toString())
-  const _setOutput = (output: string) => {
+    const [output, setOutput] = useState(props.value.toString());
+    const _setOutput = (output: string) => {
       let value: string;
       if (output.length > 16) {
         value = output.slice(0, 16);
       } else if (output.length === 0) {
-        value = '0';
-      } else if(output.indexOf('+')>0){
-        value = '0'
-      }else{
-        value =output;
+        value = "0";
+      } else if (output.indexOf("+") > 0) {
+        value = "0";
+      } else {
+        value = output;
       }
-      setOutput(value)
-      props.onChange(parseFloat(value) );
+      setOutput(value);
+      props.onChange(parseFloat(value));
     };
     const onUpdate = (e: React.MouseEvent) => {
       const text = (e.target as HTMLButtonElement).textContent;
       if (text === null) {return;}
       if (text === "完成") {
-        setOutput('0');
+        setOutput("0");
         return;
       }
       if ("0123456789.".split("").concat(["删除", "清零"]).indexOf(text) >= 0) {
         _setOutput(generateOutput(text, output));
       }
       if (text === "+") {
-        _setOutput(output+'+')
+        _setOutput(output + "+");
       }
-      if(text==='-'){
-        _setOutput(output+'-')
+      if (text === "-") {
+        _setOutput(output + "-");
       }
 
     };

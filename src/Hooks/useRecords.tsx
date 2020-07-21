@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+// import {useUpdate} from "./useUpdate";
 
 type RecordItem = {
   amount: number
@@ -11,6 +12,9 @@ type RecordItem = {
 const useRecords = () => {
   const [records, setRecord] = useState<RecordItem[]>([]);
 
+  // useUpdate(()=>{
+  //   setRecord(JSON.parse(window.localStorage.getItem('records') || '[]'))
+  // },records)
   useEffect(()=>{
     setRecord(JSON.parse(window.localStorage.getItem('records') || '[]'))
   },[])

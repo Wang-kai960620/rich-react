@@ -118,7 +118,7 @@ function Home() {
   const today = dayjs(new Date());
   const output = records.filter(t => t.type === "-").filter(t => dayjs(t.timeAt).isSame(today, "day")).reduce((sum, items) => {return (sum + items.amount);}, 0);
   const input = records.filter(t => t.type === "+").filter(t => dayjs(t.timeAt).isSame(today, "day")).reduce((sum, items) => {return sum + items.amount;}, 0);
-  const newList = records.sort((a, b) => { return dayjs(a.timeAt).valueOf() - dayjs(b.timeAt).valueOf();}).slice(records.length - 2, 999);
+  const newList = records.sort((a, b) => dayjs(a.timeAt).valueOf()-dayjs(b.timeAt).valueOf()).slice(records.length - 2, 999).sort((a, b) => dayjs(b.timeAt).valueOf()-dayjs(a.timeAt).valueOf());
   return (
     <Layout>
       <Wrapper>
@@ -148,7 +148,7 @@ function Home() {
               return (
                 <li key={t.timeAt}>
                   <div className='leftList'>
-                    <Icon name={getValue((t.tags).toString() ) || 'lions'}/>
+                    <Icon name={getValue((t.tags).toString()) || "lions"}/>
                     <span>{t.tags}</span>
                   </div>
                   <div className='rightList'>
