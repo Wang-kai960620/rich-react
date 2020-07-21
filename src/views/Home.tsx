@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 background: #fff;
 `;
 const Middle = styled.div`
-height: 60vh;
+min-height: 50vh;
 display: flex;
 flex-wrap: wrap;
 text-align: center;

@@ -12,7 +12,7 @@ overflow-y: hidden;
 flex-direction: column; 
 flex-wrap: wrap;
 flex-grow: 1;
-height: 41vh;
+height: 35vh;
 >li{
 background: #fff;
 display: flex;
