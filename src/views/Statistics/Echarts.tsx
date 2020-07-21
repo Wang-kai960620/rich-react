@@ -1,31 +1,43 @@
 import styled from "styled-components";
-import React from "react";
-// import ReactEcharts from "echarts-for-react";
+import React, {useEffect, useRef} from "react";
+import {EChartOption} from "echarts";
+import echarts from "echarts";
 
 const Wrapper = styled.div`
 height: 30vh;
-margin: 20px ;
-display: flex;
-flex-wrap: wrap;
+margin: 10px ;
 background: #fff;
->div{
-border: 1px solid black;
-flex-grow: 1;
+overflow: auto;
+>.charts{
+width: 400%;
+height: 200px;
+
 }
 `;
+type Props = {
+  option: EChartOption
+}
 
-const Echart = () => {
+const Echart: React.FC<Props> = (props) => {
+  const {option} = props;
+  const container = useRef(null);
+  const chart = useRef(null);
+  useEffect(() => {
+    // @ts-ignore
+    container.current.scrollLeft = 9999
+     // @ts-ignore
+     chart.current = echarts.init(container.current);
+  }, []);
+  useEffect(() => {
+    // @ts-ignore
+    chart.current.setOption(option);
+  }, [props.option]);
 
   return (
     <Wrapper>
-      {/*<ReactEcharts option={this.getOption()}*/}
-      {/*              notMerge={true}*/}
-      {/*              lazyUpdate={true}*/}
-      {/*              theme={"theme_name"}*/}
-      {/*              onChartReady={this.onChartReadyCallback}*/}
-      {/*              onEvents={EventsDict}*/}
-      {/*              opts={}/>*/}
+      <div ref={container} className='charts'/>
     </Wrapper>
+
   );
 };
 export {Echart};
