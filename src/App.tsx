@@ -10,10 +10,17 @@ import Statistics from "./views/Statistics";
 import Tags from "./views/Tags";
 import NoMatch from "./views/NoMatch";
 import {Home} from "./views/Home";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+max-width: 500px;
+margin: 0 auto;
+`
 
 
 function App() {
   return (
+    <Wrapper>
     <Router>
       <Switch>
         <Route path="/home">
@@ -36,6 +43,8 @@ function App() {
         </Route>
       </Switch>
     </Router>
+    </Wrapper>
+
   );
 }
 

@@ -6,6 +6,7 @@ const Wrapper = styled.div`
  justify-content: center;
  background: #fff;
  >ol{
+ max-width: 200px;
    display: flex;
    margin: 20px 0;
    text-align: center;

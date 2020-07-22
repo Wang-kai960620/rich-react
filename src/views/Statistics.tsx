@@ -123,8 +123,6 @@ function Statistics() {
 
   return (
     <Layout>
-      <Title choose={type} onChange={(item) => {setType(item);}}/>
-      <Echart option={option}/>
       <List>
         <div className='window'>
           <ol>
@@ -146,6 +144,8 @@ function Statistics() {
           </ol>
         </div>
       </List>
+      <Echart option={option}/>
+      <Title choose={type} onChange={(item) => {setType(item);}}/>
     </Layout>
   );
 }

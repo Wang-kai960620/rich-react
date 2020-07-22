@@ -8,6 +8,13 @@ height: 30vh;
 margin: 10px ;
 background: #fff;
 overflow: auto;
+overflow-x: scroll;
+overflow-y: hidden;
+&::-webkit-scrollbar{
+display: none ;
+}
+
+
 >.charts{
 width: 400%;
 height: 200px;

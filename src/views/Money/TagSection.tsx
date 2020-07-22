@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React  from "react";
 import Icon from "components/Icons";
-import {Link} from "react-router-dom";
 import {useTagMap} from "../Tags/tagsHub";
 
 const Wrapper = styled.ol`
@@ -13,6 +12,9 @@ flex-direction: column;
 flex-wrap: wrap;
 flex-grow: 1;
 height: 30vh;
+&::-webkit-scrollbar{
+display: none;
+}
 >li{
 background: #fff;
 display: flex;

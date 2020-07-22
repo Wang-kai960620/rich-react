@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import {useTagMap} from "./Tags/tagsHub";
 
 
+
 const Title = styled.div`
 display: flex;
 justify-content: center;
@@ -18,9 +19,7 @@ padding: 25px 0;
 margin: 0 auto;
 background: #fff;
 `;
-const Wrapper = styled.div`
-background: #fff;
-`;
+
 const Middle = styled.div`
 min-height: 50vh;
 display: flex;
@@ -121,47 +120,45 @@ function Home() {
   const newList = records.sort((a, b) => dayjs(a.timeAt).valueOf()-dayjs(b.timeAt).valueOf()).slice(records.length - 2, 999).sort((a, b) => dayjs(b.timeAt).valueOf()-dayjs(a.timeAt).valueOf());
   return (
     <Layout>
-      <Wrapper>
-        <Title>
+      <TextList>
+        {
+          newList.map(t => {
+            return (
+              <li key={t.timeAt}>
+                <div className='leftList'>
+                  <Icon name={getValue((t.tags).toString()) || "lions"}/>
+                  <span>{t.tags}</span>
+                </div>
+                <div className='rightList'>
+                  <div className='money'>{t.type}￥{t.amount}</div>
+                  <div>{dayjs(t.timeAt).format("HH时hh分")}</div>
+                </div>
+              </li>
+            );
+          })
+        }
+
+      </TextList>
+      <List>
+        <span className='time'>{dayjs(new Date()).format("YYYY年MM月DD日")}</span>
+        <div>
+          <span>收入￥{input}</span>
+          <span>支出￥{output}</span>
+        </div>
+      </List>
+      <Middle>
+        <div>
+          <span className='text'>今日支出</span>
+          <span className='dollar'>￥{output}</span>
+          <span className='input'>收入￥{input}</span>
+        </div>
+        <Link to={"/money"}>
+          <button>记一笔</button>
+        </Link>
+      </Middle>
+      <Title>
           <div>Panda</div>
         </Title>
-        <Middle>
-          <div>
-            <span className='text'>今日支出</span>
-            <span className='dollar'>￥{output}</span>
-            <span className='input'>收入￥{input}</span>
-          </div>
-          <Link to={"/money"}>
-            <button>记一笔</button>
-          </Link>
-        </Middle>
-        <List>
-          <span className='time'>{dayjs(new Date()).format("YYYY年MM月DD日")}</span>
-          <div>
-            <span>收入￥{input}</span>
-            <span>支出￥{output}</span>
-          </div>
-        </List>
-        <TextList>
-          {
-            newList.map(t => {
-              return (
-                <li key={t.timeAt}>
-                  <div className='leftList'>
-                    <Icon name={getValue((t.tags).toString()) || "lions"}/>
-                    <span>{t.tags}</span>
-                  </div>
-                  <div className='rightList'>
-                    <div className='money'>{t.type}￥{t.amount}</div>
-                    <div>{dayjs(t.timeAt).format("HH时hh分")}</div>
-                  </div>
-                </li>
-              );
-            })
-          }
-
-        </TextList>
-      </Wrapper>
     </Layout>
   );
 }

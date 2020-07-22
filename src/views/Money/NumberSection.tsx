@@ -4,6 +4,7 @@ import {generateOutput} from "./generateOutput";
 
 const Wrapper = styled.div`
 display: flex;
+margin: 10px 0;
 justify-content: center;
 align-items: center;
 flex-wrap: wrap;
